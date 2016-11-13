@@ -1,0 +1,17 @@
+{
+  "name": "gpio-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" : "DEBUG=app* node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^2.3.2",
+    "inquirer": "^1.2.2",
+    "onoff": "^1.1.1"
+  }
+}
