@@ -1,52 +1,29 @@
 'use strict';
 
-const debug = require('debug')('app')
-debug('init')
+const tv = require('./lib/tv')
+const rele = require('./lib/rele')
 
-const Gpio = require('onoff').Gpio
-const inquirer = require('inquirer')
-const rele = require('./rele')
+tv.start()
 rele.start()
 
-process.on('SIGINT',exit)
+tv.on('power-on',()=>{
+    console.log('ON');
+    rele.val(1,0)
+    rele.val(2,0)
+})
+tv.on('power-off',()=>{
+    console.log('OFF');
+    rele.val(1,1)
+    rele.val(2,1)
+})
+tv.on('key',(code,name)=>{
+    console.log('key',code,name);
+	rele.val(1, rele.val(1) ? 0 : 1 )
+    
+})
 
-loop()
-
-function exit(){
-	debug('exit')
-	rele.stop()
-	process.exit(0)
-}
-
-function loop(){
-	var choices = [];
-
-	choices.push({
-		name: 'Toggle K1 ('+rele.val(1)+')',
-		value : 'K1'
-	})
-
-	choices.push({
-		name : 'Toggle K2 ('+rele.val(2)+')',
-		value : 'K2'
-	})
-
-	choices.push('exit')
-	
-	inquirer.prompt([{
-			type: 'list',
-			name: 'type',
-			message: 'What to do?',
-			choices:choices 
-	}])
-	.then(result=>{
-		if (result.type == 'K1')
-			rele.val(1, rele.val(1) ? 0 : 1 )
-		if (result.type == 'K2')
-			rele.val(2, rele.val(2) ? 0 : 1 )
-		if (result.type == 'exit')
-			exit()
-	})
-	.then(loop,loop)
-}
-
+process.on( 'SIGINT', function() {
+    tv.stop();
+    rele.stop();
+    process.exit();
+});
