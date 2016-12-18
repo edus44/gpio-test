@@ -19,7 +19,6 @@ tv.on('power-off',()=>{
     amp.off()
 
     light.off()
-    light.off()
 })
 tv.on('key',(code,name)=>{
     manual = true;
