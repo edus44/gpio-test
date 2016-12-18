@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "debug": "^2.3.2",
-    "moment": "^2.16.0",
     "node-cec": "^0.1.2",
     "onoff": "^1.1.1"
   }
