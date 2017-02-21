@@ -1,10 +1,11 @@
 'use strict';
-
+const Button = require('./lib/Button')
 const tv = require('./lib/tv')
 const Rele = require('./lib/Rele')
 
-const amp = new Rele(18,'amp')
-const light = new Rele(24,'light')
+const amp = new Rele(17,'amp')
+const light = new Rele(18,'light')
+const ampSwitch = new Button(6,500)
 let manual = false;
 
 tv.start()
@@ -25,6 +26,9 @@ tv.on('key',(code,name)=>{
     light.toggle()
 })
 
+ampSwitch.on('pushed',()=>{
+    amp.toggle()
+})
 
 function isNight(){
     var hour = (new Date()).getHours()|0
