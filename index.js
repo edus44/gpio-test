@@ -2,6 +2,7 @@
 const Button = require('./lib/Button')
 const tv = require('./lib/tv')
 const Rele = require('./lib/Rele')
+const api = require('./lib/api')
 
 const amp = new Rele(17,'amp')
 const light = new Rele(18,'light')
