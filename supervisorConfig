@@ -1,0 +1,13 @@
+[program:tv]
+directory=/home/pi/repo/tv-rele-automation/
+command=node index.js
+user=pi
+environment=USER="pi",DEBUG=app:*,DEBUG_FD=stdout,DEBUG_COLORS=0
+killasgroup=true
+stopasgroup=true
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/tv.err.log
+stdout_logfile=/var/log/tv.out.log
+startretries=50
+startsecs=3
